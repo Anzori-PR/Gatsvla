@@ -1,0 +1,35 @@
+<div class="swap-card">
+    <!-- Image -->
+    <div class="swap-card__img">
+        <img [src]="item.image" alt="item" />
+
+        <!-- Condition tag -->
+        <span class="tag">{{ item.condition }}</span>
+    </div>
+
+    <!-- Body -->
+    <div class="swap-card__body">
+        <h3 class="swap-card__title">{{ item.title }}</h3>
+
+        <div class="swap-card__loc">
+            <span class="pin">📍</span>
+            <span>{{ item.location }}</span>
+        </div>
+
+        <div class="swap-card__meta">
+            <div class="user">
+                <div class="avatar">{{ ownerInitial }}</div>
+                <div class="name">{{ item.ownerName }}</div>
+            </div>
+
+            <div class="rating">
+                <span class="star">★</span>
+                <span>{{ item.rating }}</span>
+            </div>
+        </div>
+
+        <button class="swap-card__cta" type="button">
+            Owner is looking for: {{ item.lookingFor }}
+        </button>
+    </div>
+</div>

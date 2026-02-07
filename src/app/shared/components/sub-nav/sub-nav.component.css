@@ -1,0 +1,45 @@
+.subnav-wrap {
+    width: 100%;
+}
+
+.subnav {
+    height: 80px;
+
+    /* This is the aligned inner container (same as header) */
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.subnav a:first-child {
+    padding-left: 1;
+}
+
+.subnav a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    color: #6b7280;
+    padding: 10px 5px;
+}
+
+.subnav a.active {
+    color: #111827;
+    border-bottom: 3px solid #2D7A5F;
+}
+
+.msg-btn {
+    font-size: 16px;
+    margin-left: auto;
+    padding: 8px 16px;
+    background: #2D7A5F;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}

@@ -1,0 +1,138 @@
+.swap-card {
+  width: 100%;
+  max-width: 360px;
+  background: #fff;
+  border: 1px solid #e9eeec;
+  border-radius: 16px;
+  overflow: hidden;
+  overflow-y: hidden;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.swap-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.10);
+}
+
+/* Image area */
+.swap-card__img {
+  position: relative;
+  height: 210px;
+  background: #f3f4f6;
+}
+
+.swap-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Tag (Like New / New) */
+.tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(63, 184, 138, 0.18); /* Accent green transparent */
+  border: 1px solid rgba(63, 184, 138, 0.35);
+  color: #2D7A5F; /* Primary green */
+  font-weight: 800;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
+/* Body */
+.swap-card__body {
+  padding: 14px 14px 14px;
+}
+
+.swap-card__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+/* Location */
+.swap-card__loc {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #6b7280;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.pin {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Meta row */
+.swap-card__meta {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* User */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #eef2f1;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.name {
+  font-weight: 700;
+  color: #374151;
+}
+
+/* Rating */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.star {
+  color: #2D7A5F;
+  font-size: 14px;
+}
+
+/* Bottom green button */
+.swap-card__cta {
+  margin-top: 12px;
+  width: 100%;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: #2D7A5F; /* Primary green */
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+
+.swap-card__cta:hover {
+  background: #3FB88A; /* Accent green */
+  transform: translateY(-1px);
+}

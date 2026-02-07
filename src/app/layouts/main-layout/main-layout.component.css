@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page {
+  height: calc(100vh - 80px - 80px);
+  background: #f4f6f7;
+}
+
+.container {
+  max-width: 1240px;     
+  margin: 0 auto;        
+  padding: 0 18px;       
+  height: 100%;
+  display: flex;
+  gap: 16px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
