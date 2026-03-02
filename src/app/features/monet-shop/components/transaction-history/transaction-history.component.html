@@ -1,1 +1,14 @@
-<p>transaction-history works!</p>
+<div class="history" *ngIf="transactions.length">
+  <div class="h-title">ტრანზაქციების ისტორია</div>
+
+  <div class="row" *ngFor="let t of transactions">
+    <div class="left">
+      <div class="type">{{ label(t.type) }}</div>
+      <div class="date">{{ t.date }}</div>
+    </div>
+
+    <div class="amt" [class.pos]="t.amount > 0" [class.neg]="t.amount < 0">
+      {{ t.amount > 0 ? '+' : '' }}{{ t.amount }} M
+    </div>
+  </div>
+</div>

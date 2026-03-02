@@ -1,1 +1,64 @@
-<p>filter-sidebar works!</p>
+<aside class="sidebar">
+  <!-- Categories -->
+  <section class="card">
+    <div class="card-title">
+      <span class="dot"></span>
+      <span>Categories</span>
+    </div>
+
+    <div class="list">
+      <button
+        class="row"
+        type="button"
+        *ngFor="let c of (showAllCategories ? categories : (categories | slice:0:5))"
+        [class.active]="selectedCategory === c.key"
+        (click)="pickCategory(c.key)"
+      >
+        <span class="radio" [class.on]="selectedCategory === c.key"></span>
+        <span class="icon">{{ c.icon }}</span>
+        <span class="label">{{ c.label }}</span>
+      </button>
+
+      <button class="showall" type="button" (click)="toggleShowAll()">
+        {{ showAllCategories ? 'Show less' : 'Show all (8)' }} <span class="chev">›</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Condition -->
+  <section class="card">
+    <div class="card-title">
+      <span class="dot"></span>
+      <span>Condition</span>
+    </div>
+
+    <div class="list">
+      <button
+        class="row"
+        type="button"
+        *ngFor="let c of conditions"
+        [class.active]="selectedCondition === c"
+        (click)="pickCondition(c)"
+      >
+        <span class="radio" [class.on]="selectedCondition === c"></span>
+        <span class="label">{{ c }}</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Estimated Value -->
+  <section class="card">
+    <div class="card-title">
+      <span class="dot"></span>
+      <span>Estimated Value</span>
+    </div>
+
+    <div class="range">
+      <input type="range" min="0" max="500" [(ngModel)]="valueMax" (input)="onValueChange()" />
+      <div class="range-labels">
+        <span>$0</span>
+        <span>$500+</span>
+      </div>
+    </div>
+  </section>
+</aside>

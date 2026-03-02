@@ -1,0 +1,108 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: grid;
+  place-items: center;
+  z-index: 999;
+}
+
+.modal {
+  width: min(560px, 92vw);
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+}
+
+.head {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e9eeec;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.t {
+  font-weight: 900;
+  font-size: 18px;
+  color: #111827;
+}
+
+.s {
+  margin-top: 4px;
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.x {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #e9eeec;
+  background: #fff;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.body {
+  padding: 16px;
+}
+
+.card {
+  border: 1px solid #e9eeec;
+  background: #f7faf9;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px dashed #e9eeec;
+}
+.row:first-child { border-top: none; }
+
+.k {
+  color: #6b7280;
+  font-weight: 800;
+}
+
+.v {
+  color: #111827;
+  font-weight: 900;
+  text-align: right;
+}
+
+.actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}
+
+.btn {
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 900;
+  padding: 0 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn.ghost {
+  background: #fff;
+  border-color: #e9eeec;
+}
+
+.btn.primary {
+  background: #2D7A5F;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #3FB88A;
+}

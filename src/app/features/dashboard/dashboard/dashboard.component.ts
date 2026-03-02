@@ -7,7 +7,7 @@ import { RouterLink } from "@angular/router";
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ItemCardComponent, FormsModule, NgFor, RouterLink],
+  imports: [ItemCardComponent, FormsModule, NgFor],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

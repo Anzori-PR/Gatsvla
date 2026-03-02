@@ -1,0 +1,130 @@
+.overlay{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.55);
+  display:grid;
+  place-items:center;
+  padding:18px;
+  z-index:999;
+}
+
+.modal{
+  width:min(760px, 100%);
+  background:#fff;
+  border-radius:16px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.25);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.2);
+}
+
+.top{
+  padding:14px 16px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  border-bottom:1px solid #eef2f1;
+}
+
+.t{ font-size:18px; font-weight:900; color:#111827; }
+.s{ margin-top:4px; color:#6b7280; font-weight:800; font-size:13px; }
+
+.x{
+  width:38px;height:38px;border-radius:12px;
+  border:1px solid #e9eeec;
+  background:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.body{ padding:14px 16px 16px; }
+
+.sec-title{
+  font-weight:900;
+  color:#111827;
+  font-size:13px;
+}
+
+.grid{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:10px;
+}
+
+.pick{
+  border:1px solid #eef2f1;
+  border-radius:14px;
+  background:#fff;
+  padding:10px;
+  cursor:pointer;
+  text-align:left;
+  transition:.15s ease;
+}
+.pick img{
+  width:100%;
+  height:90px;
+  object-fit:cover;
+  border-radius:12px;
+  background:#f3f4f6;
+}
+.pick .p1{ margin-top:8px; font-weight:900; font-size:12px; }
+.pick .p2{ margin-top:2px; color:#6b7280; font-weight:800; font-size:11px; }
+
+.pick.on{
+  border-color: rgba(63,184,138,.45);
+  box-shadow: 0 0 0 3px rgba(63,184,138,.18);
+}
+
+.lab{
+  margin-top:12px;
+  display:block;
+  color:#6b7280;
+  font-weight:900;
+  font-size:12px;
+}
+
+.ta{
+  margin-top:6px;
+  width:100%;
+  min-height:92px;
+  border-radius:14px;
+  border:1px solid #e9eeec;
+  padding:10px 12px;
+  outline:none;
+  font-weight:700;
+  resize: vertical;
+}
+.ta:focus{
+  border-color: rgba(63,184,138,.55);
+  box-shadow: 0 0 0 3px rgba(63,184,138,.18);
+}
+
+.actions{
+  margin-top:12px;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.b{
+  height:42px;
+  padding:0 14px;
+  border-radius:12px;
+  font-weight:900;
+  cursor:pointer;
+  border:none;
+}
+
+.b.ghost{
+  background:#fff;
+  border:1px solid #e9eeec;
+}
+.b.ok{
+  background:#2D7A5F;
+  color:#fff;
+}
+.b.ok:hover{ background:#3FB88A; transform: translateY(-1px); }
+
+@media (max-width: 720px){
+  .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

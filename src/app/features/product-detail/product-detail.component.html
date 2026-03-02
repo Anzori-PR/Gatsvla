@@ -1,0 +1,99 @@
+<div class="detail-page">
+    <div class="detail-grid">
+        <!-- LEFT: Gallery -->
+        <section class="gallery-card">
+            <div class="big-image">
+                <img [src]="selectedImage" alt="selected" />
+            </div>
+
+            <div class="thumbs">
+                <button class="thumb" type="button" *ngFor="let img of item.images" (click)="changeImage(img)"
+                    [class.active]="img === selectedImage">
+                    <img [src]="img" alt="thumb" />
+                </button>
+            </div>
+        </section>
+
+        <!-- RIGHT: Details (wider) -->
+        <section class="details-card">
+            <div class="title-row">
+                <div>
+                    <h1 class="title">{{ item.title }}</h1>
+                    <div class="subrow">
+                        <span class="pill">{{ item.condition }}</span>
+                        <span class="dot">•</span>
+                        <span class="muted">📍 {{ item.location }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="owner-row">
+                <div class="owner">
+                    <span class="avatar">{{ ownerInitial }}</span>
+                    <div class="owner-meta">
+                        <div class="owner-name">{{ item.ownerName }}</div>
+                        <div class="muted small">Trusted Trader</div>
+                    </div>
+                </div>
+
+                <div class="rating">
+                    <span class="star">★</span>
+                    <span class="rate">{{ item.rating }}</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3>About this item</h3>
+            <p class="desc">{{ item.description }}</p>
+
+
+            <div class="offer-btn">
+                <button class="btn primary" type="button" (click)="openOffer()">
+                    Make Offer
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- OFFER MODAL -->
+    <div class="modal-backdrop" *ngIf="offerOpen" (click)="closeOffer()">
+        <div class="modal" (click)="$event.stopPropagation()">
+            <div class="modal-head">
+                <div>
+                    <div class="modal-title">Make an Offer</div>
+                    <div class="modal-sub">Select one of your items and add a message</div>
+                </div>
+                <button class="xbtn" type="button" (click)="closeOffer()">×</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mini-product">
+                    <img [src]="item.images[0]" alt="requested" />
+                    <div>
+                        <div class="mini-title">{{ item.title }}</div>
+                        <div class="mini-sub">This offer will use <b>1 Monet</b></div>
+                    </div>
+                </div>
+
+                <div class="select-title">Your items</div>
+
+                <div class="select-grid">
+                    <button class="pick" type="button" *ngFor="let it of myItems" (click)="selectMyItem(it.id)"
+                        [class.selected]="it.id === selectedMyItemId">
+                        <img [src]="it.image" alt="your item" />
+                        <span>{{ it.title }}</span>
+                    </button>
+                </div>
+
+                <label class="msg-label">Your Pitch (optional)</label>
+                <textarea class="msg" [(ngModel)]="pitch" placeholder="Write a short message..."></textarea>
+
+                <div class="actions">
+                    <button class="btn ghost" type="button" (click)="closeOffer()">Cancel</button>
+                    <button class="btn primary" type="button" (click)="sendOffer()">Send Offer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

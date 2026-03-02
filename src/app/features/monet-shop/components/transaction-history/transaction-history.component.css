@@ -1,0 +1,45 @@
+.history {
+  margin-top: 26px;
+  border: 1px solid #e9eeec;
+  border-radius: 16px;
+  background: #fff;
+  padding: 16px;
+}
+
+.h-title {
+  font-weight: 900;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px dashed #e9eeec;
+}
+
+.row:first-child {
+  border-top: none;
+}
+
+.type {
+  font-weight: 900;
+  color: #111827;
+}
+
+.date {
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.amt {
+  font-weight: 900;
+  align-self: center;
+}
+
+.pos { color: #2D7A5F; }
+.neg { color: #b91c1c; }

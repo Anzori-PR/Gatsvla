@@ -1,1 +1,70 @@
-<p>offer-card works!</p>
+<div class="card" [class.done]="offer.status !== 'pending'">
+  <div class="left">
+    <div class="from">
+      <span class="avatar">{{ initial }}</span>
+      <div>
+        <div class="name">{{ otherName }}</div>
+        <div class="time">
+          სტატუსი:
+          <span class="status">{{ statusLabel() }}</span>
+          <span class="hint" *ngIf="offer.status==='pending' && hint">• {{ hint }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="h">{{ offer.direction === 'received' ? 'შენი ნივთი' : 'მათი ნივთი' }}</div>
+        <div class="item">
+          <img [src]="offer.toItem.image" alt="item" />
+          <div class="txt">
+            <div class="t">{{ offer.toItem.title }}</div>
+            <div class="m">{{ offer.toItem.condition }} • ${{ offer.toItem.value }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="h">{{ offer.direction === 'received' ? 'რას გთავაზობს' : 'რას სთავაზობ' }}</div>
+        <div class="mini">
+          <div class="mini-item" *ngFor="let it of offer.offeredItems">
+            <img [src]="it.image" alt="offered" />
+            <div class="t">{{ it.title }}</div>
+            <div class="m">{{ it.condition }} • ${{ it.value }}</div>
+          </div>
+        </div>
+        <div class="sum">ჯამი: <b>${{ totalValue(offer.offeredItems) }}</b></div>
+      </div>
+    </div>
+
+    <div class="msg" *ngIf="offer.message">
+      <div class="mh">შეტყობინება</div>
+      <div class="mv">“{{ offer.message }}”</div>
+    </div>
+  </div>
+
+  <div class="right">
+    <!-- RECEIVED -->
+    <ng-container *ngIf="offer.direction === 'received'; else sentActions">
+      <button class="btn ok" type="button" (click)="accept.emit(offer.id)" [disabled]="offer.status!=='pending'">
+        ✅ მივიღე
+      </button>
+      <button class="btn no" type="button" (click)="decline.emit(offer.id)" [disabled]="offer.status!=='pending'">
+        ✖ უარვყავი
+      </button>
+      <button class="btn ghost" type="button" (click)="counter.emit(offer)" [disabled]="offer.status!=='pending'">
+        ⇄ კონტრშეთავაზება
+      </button>
+    </ng-container>
+
+    <!-- SENT -->
+    <ng-template #sentActions>
+      <button class="btn ghost" type="button" disabled>
+        ⏳ პასუხის მოლოდინში
+      </button>
+      <button class="btn no" type="button" (click)="cancel.emit(offer.id)" [disabled]="offer.status!=='pending'">
+        🗑 გაუქმება
+      </button>
+    </ng-template>
+  </div>
+</div>

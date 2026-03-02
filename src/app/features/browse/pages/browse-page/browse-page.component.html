@@ -1,1 +1,100 @@
-<p>browse-page works!</p>
+<div class="exchange">
+  <app-filter-sidebar (filtersChange)="onFiltersChange($event)"></app-filter-sidebar>
+
+  <section class="content">
+    <div class="head">
+      <h1>გაცვლა</h1>
+      <div class="count">{{ filteredItems.length }} ნივთი ხელმისაწვდომია გაცვლისთვის</div>
+    </div>
+
+    <div class="tools">
+      <div class="search">
+        <span class="icon">🔍</span>
+        <input
+          [(ngModel)]="search"
+          (ngModelChange)="onSearchChange()"
+          placeholder="მოძებნე ნივთი, კატეგორია ან მდებარეობა..."
+        />
+      </div>
+
+      <select class="sort" [(ngModel)]="sort">
+        <option value="newest">ახლები პირველზე</option>
+        <option value="oldest">ძველები პირველზე</option>
+      </select>
+
+      <!-- view switch (like image) -->
+      <div class="view">
+        <button class="vbtn" type="button" [class.on]="view==='grid'" (click)="setView('grid')" title="ბადე">▦</button>
+        <button class="vbtn" type="button" [class.on]="view==='list'" (click)="setView('list')" title="სია">≡</button>
+      </div>
+    </div>
+
+    <!-- GRID VIEW -->
+    <div class="grid" *ngIf="view==='grid'">
+      <app-item-card *ngFor="let item of visibleItems" [item]="item"></app-item-card>
+    </div>
+
+    <!-- LIST VIEW -->
+    <div class="list" *ngIf="view==='list'">
+      <article class="list-card" *ngFor="let item of visibleItems">
+        <div class="img">
+          <img [src]="item.image" alt="item" />
+        </div>
+
+        <div class="info">
+          <div class="topline">
+            <span class="tag">{{ item.condition }}</span>
+          </div>
+
+          <h3 class="title">{{ item.title }}</h3>
+          <p class="desc">{{ item.description }}</p>
+
+          <div class="meta">
+            <span class="m">
+              <span class="i">📍</span> {{ item.location }}
+            </span>
+
+            <span class="m owner">
+              <span class="avatar">{{ ownerInitial(item.ownerName) }}</span>
+              {{ item.ownerName }}
+            </span>
+
+            <span class="m rating">
+              <span class="star">★</span> {{ item.rating }}
+            </span>
+          </div>
+
+          <div class="looking">
+            ეძებს: <b>{{ item.lookingFor }}</b>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="value">
+            <div class="label">დაახლოებითი ფასი</div>
+            <div class="money">${{ item.value }}</div>
+          </div>
+
+          <button class="offer-btn" type="button" (click)="makeOffer(item)">
+            ⇄ შეთავაზება
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <!-- SHOW MORE -->
+    <div class="morebar" *ngIf="filteredItems.length > pageSize">
+      <button class="more" type="button" (click)="loadMore()" *ngIf="canLoadMore">
+        აჩვენე მეტი
+      </button>
+
+      <button class="less" type="button" (click)="showLess()" *ngIf="!canLoadMore && visibleCount > pageSize">
+        ნაკლები
+      </button>
+
+      <div class="progress">
+        ნაჩვენებია {{ visibleItems.length }} / {{ filteredItems.length }}
+      </div>
+    </div>
+  </section>
+</div>

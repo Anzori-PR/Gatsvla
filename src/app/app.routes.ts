@@ -3,7 +3,7 @@ import { DashboardComponent } from './features/dashboard/dashboard/dashboard.com
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 export const routes: Routes = [
-    {
+  {
     path: '',
     component: MainLayoutComponent,
     children: [
@@ -18,10 +18,9 @@ export const routes: Routes = [
             .then(m => m.BrowsePageComponent),
       },
       {
-        path: 'item/:id',
-        loadComponent: () =>
-          import('./features/inventory/pages/item-detail-page/item-detail-page.component')
-            .then(m => m.ItemDetailPageComponent),
+        path: 'item/:id', loadComponent: () =>
+          import('./features/product-detail/product-detail.component')
+            .then(m => m.ProductDetailComponent),
       },
       {
         path: 'inventory',

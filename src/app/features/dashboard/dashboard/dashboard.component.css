@@ -1,6 +1,6 @@
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   /* 3 cards per row */
   gap: 18px;
   align-items: stretch;

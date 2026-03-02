@@ -1,1 +1,90 @@
-<p>item-list-page works!</p>
+<div class="inventory-page">
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon">📦</div>
+      <div>
+        <div class="stat-num">{{ totalListings }}</div>
+        <div class="stat-label">Total Listings</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">👁️</div>
+      <div>
+        <div class="stat-num">{{ activeCount }}</div>
+        <div class="stat-label">Active</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">💚</div>
+      <div>
+        <div class="stat-num">{{ pendingCount }}</div>
+        <div class="stat-label">Pending Swaps</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-row">
+    <div class="search-wrap">
+      <span class="search-ico">🔍</span>
+      <input class="search" [(ngModel)]="q" placeholder="Search your listings..." />
+    </div>
+
+    <select class="select" [(ngModel)]="statusFilter">
+      <option value="all">All Status</option>
+      <option value="active">Active</option>
+      <option value="pending">Pending</option>
+      <option value="swapped">Swapped</option>
+    </select>
+
+    <select class="select" [(ngModel)]="categoryFilter">
+      <option *ngFor="let c of categories" [value]="c">
+        {{ c === 'all' ? 'All Categories' : c }}
+      </option>
+    </select>
+
+    <button class="btn-add" type="button" (click)="openAdd()">
+      <span class="plus">＋</span> Add Listing
+    </button>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid">
+    <article class="inv-card" *ngFor="let item of filteredItems">
+      <div class="pill" [class.pending]="item.status === 'pending'">
+        <span class="dot"></span>
+        {{ statusLabel(item.status) }}
+      </div>
+
+      <div class="img">
+        <img [src]="item.images[0]" alt="item" />
+      </div>
+
+      <div class="body">
+        <h3 class="title">{{ item.title }}</h3>
+        <p class="desc">{{ item.description }}</p>
+
+        <div class="meta">
+          <div class="price">${{ item.value }}</div>
+          <div class="cond">{{ item.condition }}</div>
+        </div>
+
+        <div class="actions">
+          <button class="btn-edit" type="button" (click)="openEdit(item)">✎ Edit</button>
+          <button class="btn-del" type="button" (click)="deleteItem(item.id)">🗑</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<!-- FORM MODAL (existing item-form-page) -->
+<app-item-form-page
+  *ngIf="formOpen"
+  [editingId]="editingId"
+  (close)="closeForm()"
+  (saved)="onSaved()"
+></app-item-form-page>

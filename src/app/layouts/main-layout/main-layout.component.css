@@ -3,10 +3,11 @@
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
 }
 
 .page {
-  height: calc(100vh - 80px - 80px);
+  height: auto;
   background: #f4f6f7;
 }
 

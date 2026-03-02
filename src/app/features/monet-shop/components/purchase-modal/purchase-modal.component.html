@@ -1,1 +1,33 @@
-<p>purchase-modal works!</p>
+<div class="backdrop" *ngIf="open" (click)="onBackdropClick()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="head">
+      <div>
+        <div class="t">შეძენის დადასტურება</div>
+        <div class="s">მონეტები დაემატება შენს ბალანსს მაშინვე</div>
+      </div>
+      <button class="x" type="button" (click)="close.emit()">×</button>
+    </div>
+
+    <div class="body">
+      <div class="card">
+        <div class="row">
+          <div class="k">პაკი</div>
+          <div class="v"><b>{{ pack.monets }}</b> მონეტა — ${{ pack.price }}</div>
+        </div>
+        <div class="row">
+          <div class="k">ამჟამინდელი ბალანსი</div>
+          <div class="v">{{ balance }} / {{ dailyMax }}</div>
+        </div>
+        <div class="row">
+          <div class="k">ახალი ბალანსი</div>
+          <div class="v"><b>{{ balance + pack.monets }}</b></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn ghost" type="button" (click)="close.emit()">გაუქმება</button>
+        <button class="btn primary" type="button" (click)="onConfirm()">ყიდვა</button>
+      </div>
+    </div>
+  </div>
+</div>

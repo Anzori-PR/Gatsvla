@@ -1,1 +1,55 @@
-<p>offers-page works!</p>
+<div class="offers-wrap">
+  <div class="header">
+    <div>
+      <h1>შეთავაზებები</h1>
+      <p class="sub">
+        შემოსული შეთავაზებები, შენი გაგზავნილები და ისტორია.
+      </p>
+    </div>
+
+    <div class="vault">
+      <div class="v1">შენი მონეტები</div>
+      <div class="v2">{{ monets }} M</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab" [class.on]="tab==='received'" (click)="tab='received'">
+      მიღებული <span class="pill">{{ countReceivedPending() }}</span>
+    </button>
+    <button class="tab" [class.on]="tab==='sent'" (click)="tab='sent'">
+      გაგზავნილი <span class="pill">{{ countSentPending() }}</span>
+    </button>
+    <button class="tab" [class.on]="tab==='history'" (click)="tab='history'">
+      ისტორია <span class="pill">{{ countHistory() }}</span>
+    </button>
+  </div>
+
+  <div class="list" *ngIf="filtered.length; else empty">
+    <app-offer-card
+      *ngFor="let offer of filtered"
+      [offer]="offer"
+      [hint]="counterCostText(offer)"
+      (accept)="accept($event)"
+      (decline)="decline($event)"
+      (cancel)="cancel($event)"
+      (counter)="openCounter($event)"
+    ></app-offer-card>
+  </div>
+
+  <ng-template #empty>
+    <div class="empty">
+      <div class="icon">📭</div>
+      <div class="t">აქ ჯერ არაფერია</div>
+      <div class="d">როცა შეთავაზებები იქნება, ამ ტაბში გამოჩნდება.</div>
+    </div>
+  </ng-template>
+
+  <app-counter-offer
+    [open]="counterOpen"
+    [offer]="counterTarget"
+    [myItems]="myItems"
+    (close)="closeCounter()"
+    (submit)="submitCounter($event)"
+  ></app-counter-offer>
+</div>

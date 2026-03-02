@@ -1,1 +1,34 @@
-<p>counter-offer works!</p>
+<div class="overlay" *ngIf="open" (click)="close.emit()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="top">
+      <div>
+        <div class="t">კონტრშეთავაზება</div>
+        <div class="s" *ngIf="offer">ნივთზე: <b>{{ offer.toItem.title }}</b></div>
+      </div>
+      <button class="x" type="button" (click)="close.emit()">×</button>
+    </div>
+
+    <div class="body">
+      <div class="sec-title">აირჩიე რომელი შენი ნივთები გინდა სანაცვლოდ</div>
+
+      <div class="grid">
+        <button class="pick" type="button"
+          *ngFor="let it of myItems"
+          (click)="toggle(it.id)"
+          [class.on]="isSelected(it.id)">
+          <img [src]="it.image" alt="my item" />
+          <div class="p1">{{ it.title }}</div>
+          <div class="p2">{{ it.condition }} • ${{ it.value }}</div>
+        </button>
+      </div>
+
+      <label class="lab">შეტყობინება (არასავალდებულო)</label>
+      <textarea class="ta" [(ngModel)]="message" placeholder="დაწერე მოკლე ტექსტი..."></textarea>
+
+      <div class="actions">
+        <button class="b ghost" type="button" (click)="close.emit()">გაუქმება</button>
+        <button class="b ok" type="button" (click)="confirm()">გაგზავნა</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,69 @@
-<p>shop-page works!</p>
+<div class="shop-wrap">
+    
+  <h1 class="title">გააძლიერე შენი გაცვლები</h1>
+  <p class="subtitle">
+    მონეტები ამოძრავებს ყველა გაცვლას BARTR-ზე. აიღე პაკი და გააგრძელე გაცვლა სწრაფად.
+  </p>
+
+  <!-- Packs -->
+  <div class="packs">
+    <button
+      class="pack"
+      type="button"
+      *ngFor="let p of packs"
+      (click)="selectPack(p)"
+      [class.active]="p.id === selectedPack.id"
+    >
+      <div class="badge" *ngIf="p.badge">{{ p.badge }}</div>
+
+      <div class="icon">{{ p.icon }}</div>
+
+      <div class="monets">{{ p.monets }}</div>
+      <div class="label">{{ p.label }}</div>
+
+      <div class="hr"></div>
+
+      <div class="price">
+        <span class="main">${{ p.price }}</span>
+        <span class="per">(${{ p.centsPer.toFixed(2) }}/ც)</span>
+      </div>
+    </button>
+  </div>
+
+  <!-- Ready card -->
+  <div class="ready">
+    <div>
+      <div class="ready-title">მზად ხარ გაცვლისთვის?</div>
+      <div class="ready-sub">
+        აირჩიე პაკი ზემოთ და დააჭირე ყიდვას. მონეტები მომენტალურად დაემატება შენს ვოლტს.
+      </div>
+    </div>
+
+    <button class="buy-btn" type="button" (click)="openPurchase()">
+      🧾 იყიდე {{ selectedPack.monets }} მონეტა
+    </button>
+  </div>
+
+  <!-- What can you do -->
+  <div class="section-title">რა შეგიძლია გააკეთო მონეტებით?</div>
+
+  <div class="benefits">
+    <div class="benefit">✅ გახსნა პრემიუმ გაცვლის სლოტები</div>
+    <div class="benefit">✅ გაზრდა განცხადების ხილვადობა</div>
+    <div class="benefit">✅ პრიორიტეტი შეთავაზებების რიგში</div>
+    <div class="benefit">✅ BARTR საზოგადოების მხარდაჭერა</div>
+  </div>
+
+  <!-- Optional: history block -->
+  <app-transaction-history [transactions]="transactions"></app-transaction-history>
+
+  <!-- Purchase modal -->
+  <app-purchase-modal
+    [open]="modalOpen"
+    [pack]="selectedPack"
+    [balance]="balance"
+    [dailyMax]="dailyMax"
+    (close)="closePurchase()"
+    (confirm)="confirmPurchase()"
+  ></app-purchase-modal>
+</div>
