@@ -1,1 +1,76 @@
-<p>chat-list works!</p>
+<div class="chat-list-container">
+
+  <!-- Header -->
+  <div class="list-header">
+    <div class="header-top">
+      <div class="header-title">
+        <h2>Messages</h2>
+        <span class="badge" *ngIf="totalUnread() > 0">{{ totalUnread() }}</span>
+      </div>
+      <button class="compose-btn" title="New Message">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Search -->
+    <div class="search-box">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        [(ngModel)]="searchQuery"
+        type="text"
+        placeholder="Search trades..."
+        class="search-input"
+      />
+    </div>
+  </div>
+
+  <!-- Active Trades Label -->
+  <div class="section-label">Active Trades</div>
+
+  <!-- Chat items -->
+  <div class="chat-items">
+    <div
+      *ngFor="let chat of filteredChats"
+      class="chat-item"
+      [class.active]="chat.id === selectedChatId"
+      [class.has-unread]="chat.unread > 0"
+      (click)="openChat(chat)"
+    >
+      <!-- Avatar + status -->
+      <div class="avatar-wrap">
+        <img [src]="chat.userImage" [alt]="chat.username" class="avatar" />
+        <span class="status-dot" [class]="'status-' + chat.status"></span>
+      </div>
+
+      <!-- Content -->
+      <div class="chat-info">
+        <div class="chat-top-row">
+          <span class="chat-name">{{ chat.username }}</span>
+          <span class="chat-time">{{ chat.timestamp }}</span>
+        </div>
+
+        <!-- Trade pill -->
+        <div class="trade-pill">
+          <span class="trade-item my">{{ chat.myItem }}</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+          <span class="trade-item their">{{ chat.theirItem }}</span>
+        </div>
+
+        <div class="chat-bottom-row">
+          <span class="last-msg">{{ chat.lastMessage }}</span>
+          <span class="unread-badge" *ngIf="chat.unread > 0">{{ chat.unread }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="filteredChats.length === 0">
+      <p>No conversations found</p>
+    </div>
+  </div>
+</div>

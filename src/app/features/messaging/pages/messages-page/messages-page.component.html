@@ -1,1 +1,17 @@
-<p>messages-page works!</p>
+<div class="messages-layout">
+  <!-- LEFT PANEL -->
+  <aside class="chat-sidebar" [class.hidden]="isMobile && selectedChat">
+    <app-chat-list
+      (chatSelected)="selectChat($event)"
+      [selectedChatId]="selectedChat?.id"
+    ></app-chat-list>
+  </aside>
+
+  <!-- RIGHT PANEL -->
+  <main class="chat-main">
+    <app-chat-window
+      [chat]="selectedChat"
+      (backClicked)="goBack()"
+    ></app-chat-window>
+  </main>
+</div>
