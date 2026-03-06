@@ -121,44 +121,64 @@
   transform: translateY(-1px);
 }
 
+/* Notification Icon */
+.notification-icon {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.15s ease;
+  background-color: var(--dark-bg);
+  border: none;
+  color: #e2e2e2;
+  border-radius: 8px;
+}
+
+.notification-icon:hover {  
+  background-color: #19593d;
+
+}
+
+/* Notification Icon */
+.notification-icon svg {
+  background-color: transparent;
+}
+
+
 /* Buttons */
-.btn {
-  height: 36px;
-  padding: 0 14px;
-  border-radius: 10px;
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #19593d;
+  padding: 8px;
+  border-radius: 100%;
   border: 1px solid transparent;
   font-weight: 600;
   cursor: pointer;
+  color: #ffffff;
   transition: 0.15s ease;
 }
 
-.btn--ghost {
+.login-btn--ghost {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.10);
   color: rgba(255, 255, 255, 0.85);
 }
 
-.btn--ghost:hover {
+.login-btn--ghost:hover {
   background: rgba(255, 255, 255, 0.10);
   color: #ffffff;
-}
-
-.btn--primary {
-  background: #3fb88a;
-  border-color: rgba(63, 184, 138, 0.7);
-  color: #0f1a16;
-}
-
-.btn--primary:hover {
-  filter: brightness(1.05);
-  transform: translateY(-1px);
 }
 
 /* Responsive */
 @media (max-width: 980px) {
   .nav {
-    display: none; /* later you can replace with hamburger */
+    display: none;
+    /* later you can replace with hamburger */
   }
+
   .brand {
     min-width: auto;
   }
@@ -166,6 +186,7 @@
 
 @media (max-width: 560px) {
   .vault__meta {
-    display: none; /* keep pill compact */
+    display: none;
+    /* keep pill compact */
   }
 }

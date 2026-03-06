@@ -1,0 +1,493 @@
+/* ════════════════════════════════
+   OVERLAY
+════════════════════════════════ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ════════════════════════════════
+   DIALOG — Desktop
+════════════════════════════════ */
+.dialog {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 28px 28px 28px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.16);
+  position: relative;
+  animation: slideUp 0.24s cubic-bezier(0.34, 1.4, 0.64, 1);
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #e0e0e0 transparent;
+}
+
+.dialog::-webkit-scrollbar { width: 4px; }
+.dialog::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 4px; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* ════════════════════════════════
+   CLOSE BUTTON
+════════════════════════════════ */
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  min-width: 34px; /* touch target */
+  background: #f5f5f5;
+  border: none;
+  border-radius: 9px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  z-index: 2;
+}
+.close-btn:hover  { background: #ebebeb; color: #222; }
+.close-btn:active { background: #e0e0e0; }
+
+/* ════════════════════════════════
+   LOGO
+════════════════════════════════ */
+.dialog-logo {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  padding-right: 40px; /* don't overlap close btn */
+}
+.logo-arrows {
+  color: #2D7A5F;
+  font-weight: 900;
+  margin-right: 2px;
+}
+
+/* ════════════════════════════════
+   MAIN TABS  (შესვლა / რეგისტრაცია)
+════════════════════════════════ */
+.tabs {
+  display: flex;
+  background: #f5f6f5;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 22px;
+  gap: 4px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 0;
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* bigger touch target on mobile handled via padding below */
+}
+.tab.active {
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* ════════════════════════════════
+   PERSON TABS  (ფიზ / იურ)
+════════════════════════════════ */
+.person-tabs {
+  display: flex;
+  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 18px;
+}
+
+.person-tab {
+  flex: 1;
+  padding: 9px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.person-tab.active {
+  color: #2D7A5F;
+  border-bottom-color: #2D7A5F;
+  font-weight: 700;
+}
+
+/* ════════════════════════════════
+   FORM
+════════════════════════════════ */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fields-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ════════════════════════════════
+   FIELD + LABEL
+════════════════════════════════ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 0.2px;
+}
+
+/* ════════════════════════════════
+   INPUT
+════════════════════════════════ */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: #bbb;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.input-wrap input {
+  width: 100%;
+  padding: 12px 42px 12px 38px;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 11px;
+  font-size: 14px;           /* 14px avoids iOS auto-zoom */
+  color: #333;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  -webkit-appearance: none;  /* removes iOS inset shadow */
+  appearance: none;
+}
+
+/* last field in row has no icon */
+.fields-row .field:last-child .input-wrap input {
+  padding-left: 14px;
+}
+
+.input-wrap input:focus {
+  border-color: #2D7A5F;
+  box-shadow: 0 0 0 3px rgba(45, 122, 95, 0.12);
+}
+
+.input-wrap input::placeholder { color: #ccc; }
+
+.toggle-pass {
+  position: absolute;
+  right: 4px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  color: #bbb;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: color 0.15s;
+}
+.toggle-pass:hover  { color: #2D7A5F; }
+.toggle-pass:active { background: #f5f5f5; }
+
+/* ════════════════════════════════
+   FORM LINKS
+════════════════════════════════ */
+.form-links {
+  font-size: 12px;
+  color: #999;
+  margin-top: -2px;
+}
+.form-links a {
+  color: #2D7A5F;
+  font-weight: 600;
+  text-decoration: none;
+}
+.form-links a:hover { text-decoration: underline; }
+
+/* ════════════════════════════════
+   TERMS
+════════════════════════════════ */
+.terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 12px;
+  color: #777;
+  margin-top: -2px;
+}
+.terms-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  margin-top: 1px;
+  accent-color: #2D7A5F;
+  cursor: pointer;
+}
+.terms-row label { cursor: pointer; line-height: 1.5; }
+.terms-row a {
+  color: #2D7A5F;
+  font-weight: 600;
+  text-decoration: none;
+}
+.terms-row a:hover { text-decoration: underline; }
+
+/* ════════════════════════════════
+   PRIMARY BUTTON
+════════════════════════════════ */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: #2D7A5F;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 16px rgba(45, 122, 95, 0.28);
+  margin-top: 2px;
+  touch-action: manipulation;
+}
+.btn-primary:hover  { background: #256b52; box-shadow: 0 6px 20px rgba(45, 122, 95, 0.35); }
+.btn-primary:active { transform: scale(0.99); }
+
+/* ════════════════════════════════
+   DIVIDER
+════════════════════════════════ */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ccc;
+  font-size: 12px;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+/* ════════════════════════════════
+   SOCIAL BUTTONS
+════════════════════════════════ */
+.btn-social {
+  width: 100%;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  touch-action: manipulation;
+}
+.btn-social:hover  { border-color: #ccc; background: #fafafa; color: #111; }
+.btn-social:active { background: #f5f5f5; }
+
+/* ════════════════════════════════
+   SWITCH TEXT
+════════════════════════════════ */
+.switch-text {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin: 2px 0 0;
+}
+.switch-text a {
+  color: #2D7A5F;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.switch-text a:hover { text-decoration: underline; }
+
+
+/* ════════════════════════════════
+   RESPONSIVE — Tablet  (≤ 600px)
+════════════════════════════════ */
+@media (max-width: 600px) {
+  .overlay {
+    padding: 12px;
+  }
+
+  .dialog {
+    max-width: 100%;
+    padding: 24px 20px 24px;
+    border-radius: 18px;
+    max-height: 92vh;
+  }
+
+  .tab {
+    padding: 11px 0;
+    font-size: 13px;
+  }
+
+  .fields-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+}
+
+
+/* ════════════════════════════════
+   RESPONSIVE — Mobile  (≤ 430px)
+   Dialog becomes a bottom sheet
+════════════════════════════════ */
+@media (max-width: 430px) {
+  .overlay {
+    padding: 0;
+    align-items: flex-end;  /* anchor to bottom */
+  }
+
+  .dialog {
+    border-radius: 22px 22px 0 0;
+    max-width: 100%;
+    max-height: 92vh;
+    padding: 8px 20px 32px;  /* top padding reduced — drag handle gives space */
+    animation: sheetUp 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  @keyframes sheetUp {
+    from { transform: translateY(100%); opacity: 0.6; }
+    to   { transform: translateY(0);    opacity: 1;   }
+  }
+
+  /* drag handle pill */
+  .dialog::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin: 12px auto 18px;
+  }
+
+  .close-btn {
+    top: 14px;
+    right: 16px;
+  }
+
+  .dialog-logo {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* tabs: full height for easy tapping */
+  .tab {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+
+  .person-tab {
+    padding: 11px 0;
+    font-size: 13px;
+  }
+
+  /* stack first/last name vertically */
+  .fields-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* bigger inputs — prevents iOS zoom (font-size already 14px) */
+  .input-wrap input {
+    padding: 13px 44px 13px 40px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .input-icon { left: 13px; }
+
+  .toggle-pass {
+    right: 6px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .field label {
+    font-size: 12.5px;
+  }
+
+  .btn-primary {
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 13px;
+    margin-top: 4px;
+  }
+
+  .btn-social {
+    padding: 13px 16px;
+    font-size: 13px;
+    border-radius: 13px;
+  }
+
+  .form { gap: 15px; }
+
+  .switch-text { font-size: 13px; }
+
+  .terms-row { font-size: 12.5px; }
+
+  .form-links { font-size: 12.5px; }
+}
