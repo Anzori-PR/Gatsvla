@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './features/dashboard/dashboard/dashboard.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,7 @@ export const routes: Routes = [
       },
       {
         path: 'messages',
+        canActivate: [authGuard],
         loadComponent: () =>
           import('./features/messaging/pages/messages-page/messages-page.component')
             .then(m => m.MessagesPageComponent),

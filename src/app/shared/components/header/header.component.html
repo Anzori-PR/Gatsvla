@@ -35,7 +35,7 @@
 
       <!-- If user is NOT logged in -->
 
-      <button class="login-btn" (click)="showAuth = true">
+      <button class="login-btn" (click)="showAuthDialog = true" *ngIf="!authService.isLoggedIn; else loggedIn" > 
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="lucide lucide-user-icon lucide-user">
@@ -44,7 +44,12 @@
         </svg>
       </button>
 
-      <app-auth-dialog [isOpen]="showAuth" (closed)="showAuth = false"></app-auth-dialog>
+      <ng-template #loggedIn>
+        <span>{{ authService.currentUser()?.displayName }}</span>
+        <button (click)="authService.logout()">გამოსვლა</button>
+      </ng-template>
+
+      <app-auth-dialog [isOpen]="showAuthDialog" (closed)="showAuthDialog = false" />
 
       <!-- If user IS logged in, replace buttons above with avatar menu later -->
       <!-- <button class="avatar" type="button" aria-label="Account">

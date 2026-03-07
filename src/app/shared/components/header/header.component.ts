@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,5 +13,9 @@ import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-   showAuth = false;
+  showAuth = false;
+  
+  // navbar.component.ts
+  authService = inject(AuthService);
+  showAuthDialog = false;
 }

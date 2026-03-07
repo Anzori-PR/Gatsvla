@@ -1,28 +1,61 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, inject, signal } from '@angular/core';
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup,
+  updateProfile,
+  onAuthStateChanged,
+  User
+} from '@angular/fire/auth';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
+  private auth: Auth;
 
-  private modalState = new BehaviorSubject<boolean>(false);
-  modal$ = this.modalState.asObservable();
+  // Reactive current user signal
+  currentUser = signal<User | null>(null);
 
-  openModal(){
-    this.modalState.next(true);
+  constructor() {
+    this.auth = inject(Auth);
+    // Listen for auth state changes app-wide
+    onAuthStateChanged(this.auth, (user) => {
+      this.currentUser.set(user);
+    });
   }
 
-  closeModal(){
-    this.modalState.next(false);
-  }
+  // ── Email / Password ──────────────────────
+  async login(email: string, password: string) {
+  return signInWithEmailAndPassword(this.auth, email, password);
+}
 
-  login(data:any){
-    console.log('Login:', data);
-  }
+  async register(email: string, password: string, displayName: string) {
+  const credential = await createUserWithEmailAndPassword(this.auth, email, password);
+  await updateProfile(credential.user, { displayName });
+  return credential;
+}
 
-  register(data:any){
-    console.log('Register:', data);
-  }
+  // ── Google ───────────────────────────────
+  async loginWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(this.auth, provider);
+}
 
+  // ── Facebook ─────────────────────────────
+  async loginWithFacebook() {
+  const provider = new FacebookAuthProvider();
+  return signInWithPopup(this.auth, provider);
+}
+
+  // ── Logout ───────────────────────────────
+  async logout() {
+  return signOut(this.auth);
+}
+
+  get isLoggedIn() {
+  return this.currentUser() !== null;
+}
 }
